@@ -5,11 +5,11 @@ const EventTimeline = () => {
     // Sample events array from the JSON
     const events = [
         {
-            time: "Wed Nov 06 2024 13:01:00 GMT+0530 (India Standard Time)",
+            time: "Thu Nov 07 2024 18:14:27 GMT+0700 (Indochina Time)",
             event: "Registration & Check-in"
         },
         {
-            time: "Wed Nov 06 2024 13:02:00 GMT+0530 (India Standard Time)",
+            time: "Thu Nov 07 2024 16:37:27 GMT+0700 (Indochina Time)",
             event: "Opening Ceremony"
         },
         {
@@ -50,14 +50,13 @@ const EventTimeline = () => {
     const [currentEvent, setCurrentEvent] = useState(null);
 
     useEffect(() => {
-        type EventType = {
-            time: Date,
-            event: string
-        }
+
+
         // Convert event times to Date objects
 
-        events.forEach((event: any) => {
+        events.forEach((event) => {
             if (event.time) {
+                //@ts-expect-error event is giving issue
                 event.time = new Date(event.time);
             }
         });
@@ -67,7 +66,9 @@ const EventTimeline = () => {
 
             events.forEach(event => {
                 // Check if the current time is within 1 minute of the scheduled event time
+                //@ts-expect-error error is just casuing because of year is not compatable
                 if (event.time && currentTime >= event.time && currentTime < new Date(event.time.getTime() + 60000)) {
+                    //@ts-expect-error same issue
                     setCurrentEvent(event.event);
                     console.log(event.event)
                 }
@@ -87,8 +88,10 @@ const EventTimeline = () => {
     return (
         <div>
             {currentEvent && (
-                <div className=''>
-                    <p>{`Now: ${currentEvent}`}</p>
+                <div className='mt-12 mb-4 text-3xl font-bold flex justify-center items-center  '>
+                    <div className=' px-32 rounded-md py-4'>
+                        <p><span className='text-[#A4FA3D]'>Now: </span>{`${currentEvent}`}</p>
+                    </div>
                 </div>
             )}
         </div>

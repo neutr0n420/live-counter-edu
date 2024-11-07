@@ -1,10 +1,9 @@
 'use client'
 import React, { useState, useEffect } from "react";
 const CountdownTimer = () => {
-    const [eventName, setEventName] = useState("");
-    const [eventDate, setEventDate] = useState("2024-11-10T17:00:00+0000");
-    const [countdownStarted, setCountdownStarted] = useState(true);
     const [timeRemaining, setTimeRemaining] = useState(0);
+    const eventDate = "2024-11-10T17:00:00+0000"
+    const countdownStarted = true
 
     useEffect(() => {
         if (countdownStarted && eventDate) {
@@ -25,37 +24,6 @@ const CountdownTimer = () => {
             return () => clearInterval(countdownInterval);
         }
     }, [countdownStarted, eventDate, timeRemaining]);
-
-    useEffect(() => {
-        if (countdownStarted) {
-            document.title = eventName;
-        }
-    }, [countdownStarted, eventName]);
-
-    const handleSetCountdown = () => {
-        setCountdownStarted(true);
-        localStorage.setItem("eventDate", eventDate);
-        localStorage.setItem("eventName", eventName);
-    };
-
-    // const handleStopCountdown = () => {
-    //     setCountdownStarted(false);
-    //     setTimeRemaining(0);
-    // };
-
-    // const handleResetCountdown = () => {
-    //     setCountdownStarted(false);
-    //     setEventDate("");
-    //     setEventName("");
-    //     setTimeRemaining(0);
-    //     localStorage.removeItem("eventDate");
-    //     localStorage.removeItem("eventName");
-    // };
-
-    const formatDate = (date: string) => {
-        const options = { month: "long", day: "numeric", year: "numeric" };
-        return new Date(date).toLocaleDateString("en-US", options);
-    };
 
     const formatTime = (time: number) => {
         const seconds = Math.floor((time / 1000) % 60);

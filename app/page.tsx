@@ -2,8 +2,8 @@ import Image from "next/image";
 import RiseIn from "../public/rise-in.png";
 import eduChain from "../public/EDU Chain White.png";
 import CountdownTimer from "@/components/coundown";
-import CurrentTimeLine from "@/components/TimeLine";
 import EventTimeline from "@/components/TimeLine";
+import SponserSection from "@/components/sponser";
 export default function Home() {
   return (
     <>
@@ -26,6 +26,7 @@ export default function Home() {
         <div> </div>
         <CountdownTimer />
         <EventTimeline />
+        <SponserSection />
       </div>
     </>
   );
